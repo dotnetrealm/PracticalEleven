@@ -1,4 +1,5 @@
-﻿using PracticalEleven.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using PracticalEleven.Models;
 
 namespace PracticalEleven.Services
 {
@@ -21,9 +22,10 @@ namespace PracticalEleven.Services
             return Users;
         }
 
-        public static User GetUserById(int id)
+        
+        public static User? GetUserById(int id)
         {
-            return Users.Single(e => e.Id == id);
+            return Users.SingleOrDefault(e => e.Id == id);
         }
 
         public static void AddUser(User user)

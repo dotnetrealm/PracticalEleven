@@ -31,7 +31,7 @@ namespace PracticalTen
 
             app.MapControllerRoute(
                 name: "Default",
-                pattern: "{controller=TestOne}/{action=Index}"
+                pattern: "{controller=TestOne}/{action=Index}/{id?}"
             );
 
             app.Run();

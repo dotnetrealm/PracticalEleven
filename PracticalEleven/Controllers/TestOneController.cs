@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using PracticalEleven.Models;
 using PracticalEleven.Services;
+using System.Net;
 
 namespace PracticalEleven.Controllers
 {
@@ -11,11 +13,13 @@ namespace PracticalEleven.Controllers
             return View(UserService.Users);
         }
 
-        public ViewResult View(int id)
+        public IActionResult UserDetails(int id)
         {
             var data = UserService.GetUserById(id);
+            if (data == null) return new StatusCodeResult(404); 
             return View(data);
         }
+
         [HttpGet]
         public ViewResult Create()
         {
@@ -25,14 +29,18 @@ namespace PracticalEleven.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            UserService.AddUser(user);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                UserService.AddUser(user);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
 
-        [HttpGet]
-        public ViewResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             var data = UserService.GetUserById(id);
+            if (data == null) return new StatusCodeResult(404);
             return View(data);
         }
 
