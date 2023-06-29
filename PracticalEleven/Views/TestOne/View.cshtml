@@ -1,0 +1,11 @@
+﻿@model User
+@{
+    ViewData["Title"] = "User Details Page";
+}
+
+<div>
+    <h1 class="display-4">User Details</h1>
+    <h3><i class="fa fa-solid fa-user me-3"></i>@Html.DisplayFor(user => Model.Name)</h3>
+    <h6 ><i class="fa fa-solid fa-calendar me-3"></i>@Html.DisplayFor(user => Model.DOB)</h6>
+    <h6><i class="fa fa-solid fa-location-crosshairs me-3"></i> @Html.DisplayFor(user => Model.Address)</h6>
+</div>

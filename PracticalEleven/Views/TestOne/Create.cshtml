@@ -1,0 +1,35 @@
+﻿@model User;
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1 class="display-4">Create User</h1>
+
+<div class="row d-flex justify-content-center">
+    <form asp-controller="TestOne" asp-action="Create" method="post" class="col-6">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="DOB" class="form-label"></label>
+            <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}">
+            <span class="text-danger" asp-validation-for="DOB"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label"></label>
+            <textarea class="form-control" asp-for="Address" placeholder="Enter Address"></textarea>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a class="btn btn-secondary" asp-controller="TestOne" asp-action="Index">Go back</a>
+        </div>
+
+    </form>
+</div>

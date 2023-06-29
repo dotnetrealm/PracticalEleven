@@ -1,0 +1,56 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using PracticalEleven.Models;
+using PracticalEleven.Services;
+
+namespace PracticalEleven.Controllers
+{
+    public class TestOneController : Controller
+    {
+        public ViewResult Index()
+        {
+            return View(UserService.Users);
+        }
+
+        public ViewResult View(int id)
+        {
+            var data = UserService.GetUserById(id);
+            return View(data);
+        }
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            UserService.AddUser(user);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            var data = UserService.GetUserById(id);
+            return View(data);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int id, User user)
+        {
+            if (ModelState.IsValid)
+            {
+                UserService.UpdateUser(id, user);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            UserService.RemoveUserById(id);
+            return RedirectToAction("Index");
+        }
+    }
+}
