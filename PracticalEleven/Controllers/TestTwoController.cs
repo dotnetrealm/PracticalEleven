@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using PracticalEleven.Models;
 using PracticalEleven.Services;
-using System.Net;
 
 namespace PracticalEleven.Controllers
 {
-    public class TestOneController : Controller
+    public class TestTwoController : Controller
     {
         public ViewResult Index()
         {
             return View(UserService.GetAllUsers());
         }
 
+        [HttpGet]
         public IActionResult UserDetails(int id)
         {
             var data = UserService.GetUserById(id);
-            if (data == null) return new StatusCodeResult(404); 
+            if (data == null) return new StatusCodeResult(404);
             return View(data);
         }
 
@@ -37,6 +36,7 @@ namespace PracticalEleven.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var data = UserService.GetUserById(id);

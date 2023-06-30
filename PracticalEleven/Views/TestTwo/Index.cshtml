@@ -1,0 +1,14 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Users  Management</h1>
+</div>
+<div class="mb-3">
+    <a class="btn btn-outline-dark" asp-action="Create" asp-controller="TestTwo"><i class="fa fa-plus"></i> Add new User</a>
+</div>
+<div class="UserData ">
+   <partial name="_UsersTable" model="Model"/>
+</div>

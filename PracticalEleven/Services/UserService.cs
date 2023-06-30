@@ -5,10 +5,10 @@ namespace PracticalEleven.Services
 {
     public static class UserService
     {
-        public static List<User> Users;
+        private static List<User> _users;
         static UserService()
         {
-            Users = new() {
+            _users = new() {
                 new User() { Id = 1, Name="Bhavin", DOB = new DateOnly(2002, 02, 09), Address = "Rajkot"},
                 new User() { Id = 2, Name="Vipul", DOB = new DateOnly(1999, 07, 07), Address = "Ahmedabad"},
                 new User() { Id = 3, Name="Jil", DOB = new DateOnly(2001, 04, 17), Address = "Anand"},
@@ -19,37 +19,38 @@ namespace PracticalEleven.Services
 
         public static List<User> GetAllUsers()
         {
-            return Users;
+            return _users;
         }
 
-        
+
         public static User? GetUserById(int id)
         {
-            return Users.SingleOrDefault(e => e.Id == id);
+            return _users.SingleOrDefault(e => e.Id == id);
         }
 
         public static void AddUser(User user)
         {
-            var maxId = Users.Max(e => e.Id);
+            var maxId = _users.Max(e => e.Id);
             user.Id = maxId + 1;
-            Users.Add(user);
+            _users.Add(user);
         }
 
         public static void RemoveUserById(int id)
         {
-            User? user = Users.SingleOrDefault(x => x.Id == id);
-            if (user != null) Users.Remove(user);
+            User? user = _users.SingleOrDefault(x => x.Id == id);
+            if (user != null) _users.Remove(user);
         }
 
         public static void UpdateUser(int id, User user)
         {
-            Users.Where(e => e.Id == id).Select(s =>
+            _users.Where(e => e.Id == id).Select(s =>
             {
                 s.Name = user.Name;
                 s.DOB = user.DOB;
                 s.Address = user.Address;
                 return s;
             }).ToList();
+
         }
 
     }
