@@ -1,27 +1,68 @@
 ﻿@model User;
 
-<form asp-controller="TestTwo" asp-action="Create" method="post" class="col-6">
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name">
-        <span class="text-danger" asp-validation-for="Name"></span>
+<form class="border border-1 border-dark p-3 mb-5" id="CreateUserForm">
+    <h4 class="text-decoration-underline mb-4">Create New User</h4>
+    <div class="form-row d-flex align-items-center ">
+        <div class="col-3 me-5">
+            <label asp-for="Name" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name">
+            </div>
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="col-3 me-5">
+            <label asp-for="DOB" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <input type="date" class="form-control" asp-for="DOB">
+            </div>
+            <span class="text-danger" asp-validation-for="DOB"></span>
+        </div>
+        <div class="col-3 me-5">
+            <label asp-for="Address" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <textarea class="form-control" asp-for="Address" rows="1" style="resize:none"></textarea>
+            </div>
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+        <div class="col-3 align-self-end mb-2">
+            <button type="submit" class="btn btn-outline-info">Create</button>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="DOB" class="form-label"></label>
-        <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}">
-        <span class="text-danger" asp-validation-for="DOB"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Address" class="form-label"></label>
-        <textarea class="form-control" asp-for="Address" placeholder="Enter Address"></textarea>
-        <span class="text-danger" asp-validation-for="Address"></span>
-    </div>
-
-    <div class="col-12">
-        <button type="submit" class="btn btn-outline-info">Create</button>
-        <a class="btn btn-outline-secondary" asp-controller="TestTwo" asp-action="Index">Go back</a>
-    </div>
-
 </form>
+
+@*<form asp-controller="TestTwo" asp-action="Create" method="post" class="col-6">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label asp-for="Name" class="sr-only"></label>
+            <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}">
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                <label class="form-check-label" for="autoSizingCheck">
+                    Remember me
+                </label>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+    </div>
+</form>*@
+
+@section PartitalScripts{
+    $("#CreateUserForm").on("submit", (e) => {
+        e.preventDefault();
+        console.log($(this).serialize());
+    });
+}

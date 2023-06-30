@@ -20,20 +20,16 @@ namespace PracticalEleven.Controllers
         }
 
         [HttpGet]
-        public ViewResult Create()
+        public PartialViewResult Create()
         {
-            return View();
+            return PartialView("_Create", new User());
         }
 
         [HttpPost]
         public IActionResult Create(User user)
         {
-            if (ModelState.IsValid)
-            {
-                UserService.AddUser(user);
-                return RedirectToAction("Index");
-            }
-            return View();
+            UserService.AddUser(user);
+            return new PartialViewResult();
         }
 
         [HttpGet]
@@ -41,7 +37,7 @@ namespace PracticalEleven.Controllers
         {
             var data = UserService.GetUserById(id);
             if (data == null) return new StatusCodeResult(404);
-            return View(data);
+            return PartialView(data);
         }
 
         [HttpPost]
@@ -55,6 +51,7 @@ namespace PracticalEleven.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             UserService.RemoveUserById(id);

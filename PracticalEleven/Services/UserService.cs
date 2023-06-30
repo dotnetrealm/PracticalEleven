@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PracticalEleven.Models;
+﻿using PracticalEleven.Models;
 
 namespace PracticalEleven.Services
 {
@@ -17,17 +16,29 @@ namespace PracticalEleven.Services
             };
         }
 
+        /// <summary>
+        /// Get all user list
+        /// </summary>
+        /// <returns></returns>
         public static List<User> GetAllUsers()
         {
             return _users;
         }
 
-
+        /// <summary>
+        /// Get specific user by id
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <returns></returns>
         public static User? GetUserById(int id)
         {
             return _users.SingleOrDefault(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <param name="user">User object</param>
         public static void AddUser(User user)
         {
             var maxId = _users.Max(e => e.Id);
@@ -35,12 +46,21 @@ namespace PracticalEleven.Services
             _users.Add(user);
         }
 
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="id">UserId</param>
         public static void RemoveUserById(int id)
         {
             User? user = _users.SingleOrDefault(x => x.Id == id);
             if (user != null) _users.Remove(user);
         }
 
+        /// <summary>
+        /// Update user details
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <param name="user">Updated user object</param>
         public static void UpdateUser(int id, User user)
         {
             _users.Where(e => e.Id == id).Select(s =>

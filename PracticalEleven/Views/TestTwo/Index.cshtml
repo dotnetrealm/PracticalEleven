@@ -7,8 +7,32 @@
     <h1 class="display-4">Users  Management</h1>
 </div>
 <div class="mb-3">
-    <a class="btn btn-outline-dark" asp-action="Create" asp-controller="TestTwo"><i class="fa fa-plus"></i> Add new User</a>
+    <button class="btn btn-outline-dark" id="CreateUser"><i class="fa fa-plus"></i> Add new User</button>
 </div>
-<div class="UserData ">
-   <partial name="_UsersTable" model="Model"/>
+<div id="UserForm"></div>
+<div class="UserData">
+    <partial name="_UsersTable" model="Model" />
 </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(() => {
+            $("#CreateUser").on("click", (e) => {
+                var url = '@Url.Action("Create", "TestTwo")';
+                $("#UserForm").load(url);
+            });
+
+            $("#CreateUserForm").on("submit", (e) => {
+                e.preventDefault();
+                console.log($(this).serialize());
+            });
+
+            Array.from($(".editUser")).forEach((ele) => {
+                $(ele).on("click", (e) => {
+                    var url = '@Url.Action("Edit", "TestTwo")' + "/" + e.currentTarget.id;
+                    $("#UserForm").load(url);
+                })
+            })
+        })
+    </script>
+}

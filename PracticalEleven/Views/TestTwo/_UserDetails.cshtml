@@ -1,10 +1,10 @@
 ﻿@model User
 
-<div class="border border-2 border-dark w-50 text-center p-4 m-3">
+<div class="border border-2 border-dark  text-center p-4 m-3">
     <div class="d-flex align-items-center justify-content-between">
-        <h5><i class="fa fa-solid fa-user me-2"></i>@Html.DisplayFor(user => Model.Name)</h5>
-        <h5><i class="fa fa-solid fa-calendar me-2"></i>@Html.DisplayFor(user => Model.DOB)</h5>
-        <h5><i class="fa fa-solid fa-map-marker me-2"></i> @Html.DisplayFor(user => Model.Address)</h5>
+        <h5 class="mx-3"><i class="fa fa-solid fa-user me-2"></i>@Html.DisplayFor(user => Model.Name)</h5>
+        <h5 class="mx-3"><i class="fa fa-solid fa-calendar me-2"></i>@Html.DisplayFor(user => Model.DOB)</h5>
+        <h5 class="mx-3"><i class="fa fa-solid fa-map-marker me-2"></i> @Html.DisplayFor(user => Model.Address)</h5>
     </div>
     <hr />
     <div class="d-flex justify-content-center">
