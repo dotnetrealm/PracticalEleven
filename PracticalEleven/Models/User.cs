@@ -12,8 +12,8 @@ namespace PracticalEleven.Models
         public string Name { get; set; } = null!;
 
         [Required(ErrorMessage = "Birthdate field is required")]
-        [Range(typeof(DateOnly), "1800-01-01", "2022-12-31", ErrorMessage = "Please select valid Birthdate (1800/01/01 - 2022/12/31)")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [Range(typeof(DateOnly), "1800-01-01", "2022-12-31", ErrorMessage = "Please select valid Birthdate (1800/01/01 - 2022/12/31)")]
         public DateOnly DOB { get; set; }
 
         [Required(ErrorMessage = "Address field is required")]

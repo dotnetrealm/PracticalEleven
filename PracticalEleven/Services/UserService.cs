@@ -39,11 +39,13 @@ namespace PracticalEleven.Services
         /// Create new user
         /// </summary>
         /// <param name="user">User object</param>
-        public static void AddUser(User user)
+        /// <returns>status</returns>
+        public static int AddUser(User user)
         {
             var maxId = _users.Max(e => e.Id);
             user.Id = maxId + 1;
             _users.Add(user);
+            return user.Id;
         }
 
         /// <summary>

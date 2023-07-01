@@ -22,14 +22,28 @@ namespace PracticalEleven.Controllers
         [HttpGet]
         public PartialViewResult Create()
         {
-            return PartialView("_Create", new User());
+            return PartialView("_Create");
         }
 
         [HttpPost]
-        public IActionResult Create(User user)
+        public JsonResult Create([Bind(include: new[] { "Name, DOB, Address"})]User user)
         {
-            UserService.AddUser(user);
-            return new PartialViewResult();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    string messages = string.Join("\n", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    throw new Exception(messages);
+                }
+
+                user.Id = UserService.AddUser(user);
+                return Json(new { Result = "OK", Data = new { user } });
+            } catch(Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
         }
 
         [HttpGet]
