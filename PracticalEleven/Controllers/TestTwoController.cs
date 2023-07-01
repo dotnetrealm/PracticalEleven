@@ -16,7 +16,7 @@ namespace PracticalEleven.Controllers
         {
             var data = UserService.GetUserById(id);
             if (data == null) return new StatusCodeResult(404);
-            return View(data);
+            return PartialView("_UserDetails", data);
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace PracticalEleven.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create([Bind(include: new[] { "Name, DOB, Address"})]User user)
+        public JsonResult Create([Bind(include: new[] { "Name, DOB, Address" })] User user)
         {
             try
             {
@@ -40,7 +40,8 @@ namespace PracticalEleven.Controllers
 
                 user.Id = UserService.AddUser(user);
                 return Json(new { Result = "OK", Data = new { user } });
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return Json(new { Result = "ERROR", Message = ex.Message });
             }
@@ -51,25 +52,37 @@ namespace PracticalEleven.Controllers
         {
             var data = UserService.GetUserById(id);
             if (data == null) return new StatusCodeResult(404);
-            return PartialView(data);
+            return PartialView("_Edit", data);
         }
 
         [HttpPost]
-        public IActionResult Edit(int id, User user)
+        public JsonResult Edit(int id, [Bind("Name, DOB, Address")] User user)
         {
-            if (ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    string messages = string.Join("\n", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                    throw new Exception(messages);
+                }
+
                 UserService.UpdateUser(id, user);
-                return RedirectToAction("Index");
+                user.Id = id;
+                return Json(new { Result = "OK", Data = new { user } });
             }
-            return View();
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public IActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             UserService.RemoveUserById(id);
-            return RedirectToAction("Index");
+            return Json(new { Result = "OK" });
         }
     }
 }

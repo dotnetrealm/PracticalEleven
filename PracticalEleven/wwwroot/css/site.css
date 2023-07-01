@@ -26,3 +26,13 @@ body {
     font-weight: bold;
     color: red;
 }
+
+.mobile-margin {
+    margin-top: 0px !important;
+}
+
+@media only screen and (max-width: 576px) {
+    .mobile-margin {
+        margin-top: 5px !important;
+    }
+}

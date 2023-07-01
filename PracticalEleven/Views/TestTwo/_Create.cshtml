@@ -5,27 +5,24 @@
     <div id="ValidationSummary" class="alert alert-danger d-none" role="alert"></div>
     <div class="row">
         <div class="col-md-3 pr-5">
-            <label asp-for="Name" class="form-label required"></label>
+            <label asp-for="Name" class="form-label "></label>
             <div class="input-group mb-2">
-                <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name" maxlength="50">
+                <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name" maxlength="50" required>
             </div>
-            <span class="text-danger" asp-validation-for="Name"></span>
         </div>
         <div class="col-md-3 pr-5">
-            <label asp-for="DOB" class="form-label required"></label>
+            <label asp-for="DOB" class="form-label"></label>
             <div class="input-group mb-2">
                 <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}" required>
             </div>
-            <span class="text-danger" asp-validation-for="DOB"></span>
         </div>
         <div class="col-md-4 pr-5">
-            <label asp-for="Address" class="form-label required"></label>
+            <label asp-for="Address" class="form-label"></label>
             <div class="input-group mb-2">
-                <textarea class="form-control" asp-for="Address" rows="1" style="resize:none" required maxlength="100"></textarea>
+                <textarea class="form-control" asp-for="Address" rows="1" style="resize:none" maxlength="100" required></textarea>
             </div>
-            <span class="text-danger" asp-validation-for="Address"></span>
         </div>
-        <div class="col-md-2 mb-2 align-self-end">
+        <div class="col-md-2 align-self-end mobile-margin">
             <button type="submit" class="btn btn-outline-dark">Create</button>
         </div>
     </div>

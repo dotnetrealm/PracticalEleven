@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<User>
-<table class="table" id="UserTable">
+
+<table class="table text-center" id="UserTable">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -9,24 +10,18 @@
             <th scope="col">Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
         @foreach (var user in Model)
         {
-            <tr>
+            <tr id="@user.Id">
                 <th scope="row">@Html.DisplayFor(data => user.Id)</th>
                 <td>@Html.DisplayFor(data => user.Name)</td>
                 <td>@Html.DisplayFor(data => user.DOB)</td>
                 <td>@Html.DisplayFor(data => user.Address)</td>
                 <td>
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm " asp-controller="TestOne" asp-action="UserDetails" asp-route-id="@user.Id"><i class="fa fa-eye"></i></a>
-                        <button class="btn btn-sm editUser z-index-3" id="@user.Id"><i class="fa fa-user-pen"></i></button>
-                        <form method="post" asp-controller="TestOne" asp-action="Delete" asp-route-id="@user.Id">
-                            <button type="submit" class="btn btn-sm" onclick="return confirm('Are you sure you want to delete this?')">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-                    </div>
+                        <button class="btn btn-sm viewUser"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-sm editUser" ><i class="fa fa-user-pen"></i></button>
+                        <button class="btn btn-sm deleteUser"><i class="fa fa-trash"></i></button>
                 </td>
             </tr>
         }

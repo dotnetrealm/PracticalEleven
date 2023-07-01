@@ -1,29 +1,30 @@
 ﻿@model User;
 
-<form asp-controller="TestOne" asp-action="Edit" method="post" class="col-6">
-    @Html.HiddenFor(e => e.Id)
-
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name">
-        <span class="text-danger" asp-validation-for="Name"></span>
+<form class="py-3 mb-5" id="EditUserForm">
+    <h4 class="text-decoration-underline mb-4">Edit User</h4>
+    <div id="ValidationSummary" class="alert alert-danger d-none" role="alert"></div>
+    <div class="row">
+        <input type="hidden" asp-for="Id" />
+        <div class="col-md-3 pr-5">
+            <label asp-for="Name" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" asp-for="Name" placeholder="Enter Name" maxlength="50">
+            </div>
+        </div>
+        <div class="col-md-3 pr-5">
+            <label asp-for="DOB" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}" required>
+            </div>
+        </div>
+        <div class="col-md-4 pr-5">
+            <label asp-for="Address" class="form-label required"></label>
+            <div class="input-group mb-2">
+                <textarea class="form-control" asp-for="Address" rows="1" style="resize:none" required maxlength="100"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 align-self-end mobile-margin">
+            <button type="submit" class="btn btn-outline-dark">Update</button>
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="DOB" class="form-label"></label>
-        <input type="date" class="form-control" asp-for="DOB" asp-format="{0:yyyy-MM-dd}">
-        <span class="text-danger" asp-validation-for="DOB"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Address" class="form-label"></label>
-        <textarea class="form-control" asp-for="Address" placeholder="Enter Address"></textarea>
-        <span class="text-danger" asp-validation-for="Address"></span>
-    </div>
-
-    <div class="col-12">
-        <button type="submit" class="btn btn-outline-info">Update</button>
-        <a class="btn btn-outline-secondary" asp-controller="TestTwo" asp-action="Index">Cancle</a>
-    </div>
-
 </form>

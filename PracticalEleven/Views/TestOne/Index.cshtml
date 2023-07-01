@@ -1,16 +1,12 @@
 ﻿@model IEnumerable<User>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Test-01";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Users  Management</h1>
-</div>
-<div class="mb-3">
-    <a class="btn btn-outline-dark" asp-action="Create" asp-controller="TestOne"><i class="fa fa-plus"></i> Add new User</a>
-</div>
+<h1 class="display-4 text-center mb-5">Users Management</h1>
+
 <div class="UserData ">
-    <table class="table text-center ">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -43,5 +39,11 @@
             }
         </tbody>
     </table>
-
 </div>
+
+<div class="my-3">
+    <a class="btn btn-outline-dark my-3" asp-controller="TestOne" asp-action="Create"><i class="fa fa-plus"></i> Create new User</a>
+</div>
+
+@*container for toast messages*@
+<div id="ToastDisplay"></div>

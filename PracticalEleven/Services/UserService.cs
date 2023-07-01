@@ -42,7 +42,7 @@ namespace PracticalEleven.Services
         /// <returns>status</returns>
         public static int AddUser(User user)
         {
-            var maxId = _users.Max(e => e.Id);
+            var maxId = (_users.Count == 0) ? 0 : _users.Max(e => e.Id);
             user.Id = maxId + 1;
             _users.Add(user);
             return user.Id;

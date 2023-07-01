@@ -2,7 +2,7 @@
 
 namespace PracticalEleven.Controllers
 {
-    public class ToastController:Controller
+    public class ToastController : Controller
     {
         public IActionResult Index(string message = "Success!!")
         {

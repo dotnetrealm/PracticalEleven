@@ -1,83 +1,23 @@
 ﻿@model IEnumerable<User>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Test-02";
 }
-`
-
-    <h1 class="display-4 text-center mb-5">Users  Management</h1>
+@*page heading*@
+<h1 class="display-4 text-center mb-5">Users Management</h1>
 
 <div class="UserData">
+    @*user loads here*@
     <partial name="_UsersTable" model="Model" />
 </div>
-<div class="mb-3">
-    <button class="btn btn-outline-dark" id="CreateUser"><i class="fa fa-plus"></i> Add new User</button>
-</div>
+
+<button class="btn btn-outline-dark my-3" id="CreateUser"><i class="fa fa-plus"></i> Create new User</button>
+
+@*container for toast messages*@
+<div id="ToastDisplay"></div>
+
+@*User Create/Edit Form area*@
 <div id="UserForm"></div>
 
 @section Scripts{
-    <script>
-        $(document).ready(() => {
-            $("#CreateUser").on("click", (e) => {
-                var url = '@Url.Action("Create", "TestTwo")';
-                $("#UserForm").load(url, () => {
-                    $("#CreateUserForm").on("submit", (e) => {
-                        e.preventDefault();
-                        $.ajax({
-                            url,
-                            type: "post",
-                            data: $("#CreateUserForm").serialize(),
-                            success: (res) => {
-                                console.log(res);
-                                if (res.result == "OK") {
-                                    var user = res.data.user;
-                                    var row = `<tr>
-                                                    <th scope="row">`+ user.id + `</th>
-                                                                    <td>`+ user.name + `</td>
-                                                            <td>`+ user.dob + `</td>
-                                                    <td>`+ user.address + `</td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center">
-                                                            <a class="btn btn-sm " asp-controller="TestOne" asp-action="UserDetails" asp-route-id="`+ user.id + `"><i class="fa fa-eye"></i></a>
-                                                                    <button class="btn btn-sm editUser z-index-3" id="`+ user.id + `"><i class="fa fa-user-pen"></i></button>
-                                                                    <form method="post" asp-controller="TestOne" asp-action="Delete" asp-route-id="`+ user.id + `">
-                                                                    <button type="submit" class="btn btn-sm" onclick="return confirm('Are you sure you want to delete this?')">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
-                                                </tr>`;
-                                    $("#UserTable tbody").append(row);
-                                    $("#UserForm").empty();
-                                    
-                                    //Generate toast
-                                    var url = '@Url.Action("Index", "Toast", new { message = "User Created Successfully"})';
-                                    $.get(url, (res)=>{
-                                        $("body").append(res);
-                                        $('.toast').toast('show');
-                                    })
-                                } 
-                                else {
-                                    $("#ValidationSummary").removeClass("d-none");
-                                    $("#ValidationSummary").text(res.message);
-                                    //Generate toast
-                                    var url = '@Url.Action("Index", "Toast", new { message = "Validation Failed!"})';
-                                    $.get(url, (res) => {
-                                        $("body").append(res);
-                                        $('.toast').toast('show');
-                                    })
-                                }
-                            },
-                        })
-                    });
-                });
-            });
-            Array.from($(".editUser")).forEach((ele) => {
-                $(ele).on("click", (e) => {
-                    var url = '@Url.Action("Edit", "TestTwo")' + "/" + e.currentTarget.id;
-                    $("#UserForm").load(url);
-                })
-            })
-        })
-    </script>
+    <script src="~/js/users-script.js" asp-append-version="true"></script>
 }
