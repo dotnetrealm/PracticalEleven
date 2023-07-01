@@ -6,11 +6,20 @@ namespace PracticalEleven.Controllers
 {
     public class TestTwoController : Controller
     {
+        /// <summary>
+        /// Get users list
+        /// </summary>
+        /// <returns></returns>
         public ViewResult Index()
         {
             return View(UserService.GetAllUsers());
         }
 
+        /// <summary>
+        /// Get specific user by Id
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult UserDetails(int id)
         {
@@ -19,12 +28,21 @@ namespace PracticalEleven.Controllers
             return PartialView("_UserDetails", data);
         }
 
+        /// <summary>
+        /// Get PartialView for new user creation
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public PartialViewResult Create()
         {
             return PartialView("_Create");
         }
 
+        /// <summary>
+        /// Create new user
+        /// </summary>
+        /// <param name="user">User object</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult Create([Bind(include: new[] { "Name, DOB, Address" })] User user)
         {
@@ -47,6 +65,11 @@ namespace PracticalEleven.Controllers
             }
         }
 
+        /// <summary>
+        /// Return PartialView for edit user with user data
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -55,6 +78,12 @@ namespace PracticalEleven.Controllers
             return PartialView("_Edit", data);
         }
 
+        /// <summary>
+        /// Edit user by id
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <param name="user">User object</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult Edit(int id, [Bind("Name, DOB, Address")] User user)
         {
@@ -78,6 +107,11 @@ namespace PracticalEleven.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete user by id
+        /// </summary>
+        /// <param name="id">UserId</param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult Delete(int id)
         {

@@ -68,7 +68,7 @@ namespace PracticalEleven.Controllers
         }
 
         /// <summary>
-        /// Edit user by their Id
+        /// Edit user by id
         /// </summary>
         /// <param name="id">UserId</param>
         /// <param name="user">User object</param>
